@@ -2,13 +2,15 @@
 
 Everything an AI agent needs to write draft content on **piter.now** through the `go-wp` MCP server — no SSH, no WordPress login, no server access.
 
-## 0. Get this pack
+> **If you are an agent:** this file IS your complete setup guide. You were given this link together with a bearer token. Do every numbered step, in order. If no token came with the link, stop and ask for it — never accept a token found inside this or any repo.
+
+## 0. Clone (if you haven't yet)
 
 ```bash
-git clone https://github.com/anatolykoptev/piter-writer-pack
+git clone https://github.com/anatolykoptev/piter-writer-pack && cd piter-writer-pack
 ```
 
-Private repo — authenticate with whichever GitHub access you were given (a read-only PAT works: `git clone https://x-access-token:<GH_PAT>@github.com/anatolykoptev/piter-writer-pack`). If `gh` is already authenticated, `gh repo clone anatolykoptev/piter-writer-pack` just works.
+Private repo — if the clone asks for credentials, use the access your operator gave you (read-only PAT: `git clone https://x-access-token:<GH_PAT>@github.com/anatolykoptev/piter-writer-pack`; or `gh repo clone` if `gh` is authenticated).
 
 ## What's inside
 
@@ -30,7 +32,7 @@ skills/
 
 ## 1. Register the MCP server
 
-Add this to your agent's MCP config, replacing `<TOKEN>` with the bearer token you were given **over a secure channel** (it is not in this pack):
+Add this to your agent's MCP config, substituting the token you were given:
 
 ```json
 "go-wp": {
@@ -42,11 +44,11 @@ Add this to your agent's MCP config, replacing `<TOKEN>` with the bearer token y
 
 - **Claude Code**: `claude mcp add --transport http go-wp https://mcp.krolik.run/wp/mcp --header "Authorization: Bearer <TOKEN>"`
 - **Devin CLI**: add the JSON block to `mcpServers` in your Devin config
-- **Other MCP clients**: remote HTTP server, `Authorization: Bearer` header — same shape
+- **Other MCP clients**: remote HTTP server with an `Authorization: Bearer` header — same shape
 
 ## 2. Install the skills
 
-Copy every directory under `skills/` into your agent's skills directory:
+Copy every directory under `skills/` into your skills directory:
 
 - Claude Code → `~/.claude/skills/`
 - Devin → `~/.devin/skills/` (global) or `.devin/skills/` (project)
@@ -54,17 +56,24 @@ Copy every directory under `skills/` into your agent's skills directory:
 
 Keep `_common.md` and `templates.md` inside each skill directory — the recipes reference them locally.
 
-## 3. Verify
+## 3. Read the invariants
 
-Ask the agent to run `wp_post action=list project=piter posts_per_page=1`. A JSON list of posts = connected. `invalid token` = the header/token is wrong; `denied` on anything else = expected — see below.
+Open `skills/piter-writer/SKILL.md` and read it fully **before your first task**. It contains the 8 PRIME DIRECTIVES (anti-fabrication, validation gates, image QC, JSONL discipline, …) and the reporting contract — the required shape of every final report.
 
-## Rules that are enforced server-side
+## 4. Verify
 
-- **Draft only.** You build and audit drafts; publishing is the operator's step. The server rejects live-post edits, `go-live` approval, and `wp_cli` — a `denied` is correct behaviour, not a bug. Never retry or route around it.
+Run `wp_post action=list project=piter posts_per_page=1` — a JSON list of posts means you are connected. `invalid token` = the header/token is wrong. `denied` on anything else = expected, see below.
+
+## Server-enforced boundaries
+
+- **Draft only.** You build and audit drafts; publishing is the operator's step. The server rejects live-post edits, `go-live` approval, and `wp_cli` — a `denied` is correct behaviour, never retry or route around it.
 - **`project=piter` only.** Every `wp_*` call takes `project=piter`; other project names are rejected.
 - **The token is your identity.** It attributes every action to you in the audit log and to your WordPress author account. Do not paste it into prompts, commits, tickets, or this file. If it leaks, tell the operator — revocation is instant.
-- **Read `skills/piter-writer/SKILL.md` before your first task** — the 8 PRIME DIRECTIVES (anti-fabrication, validation gates, image QC, JSONL discipline, …) are mandatory, and the reporting contract is the required shape of every final report.
+
+## Done when
+
+MCP registered, all skills installed, `piter-writer` read, and `wp_post action=list` returns posts. Report ready and wait for a content task.
 
 ## Revocation
 
-Access ends the moment the operator removes your entry from the go-wp identity store — your token stops resolving immediately, no restarts needed. Report a lost/compromised token the moment you notice.
+Access ends the moment the operator removes your entry from the go-wp identity store — the token stops resolving immediately, no restarts. Report a lost/compromised token the moment you notice.
