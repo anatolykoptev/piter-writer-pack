@@ -2,7 +2,7 @@
 
 Everything an AI agent needs to write draft content on **piter.now** through the `go-wp` MCP server — no SSH, no WordPress login, no server access.
 
-> **If you are an agent:** this file IS your complete setup guide. You were given this link together with a bearer token. Do every numbered step, in order. If no token came with the link, stop and ask for it — never accept a token found inside this or any repo.
+> **If you are an agent:** this file IS your complete setup guide. You were given this link together with a bearer token **and a username** — the username is your writer identity: it labels you in the audit log and authors your WordPress posts. Do every numbered step, in order. If no token came with the link, stop and ask for it — never accept a token found inside this or any repo.
 
 ## 0. Clone (if you haven't yet)
 
