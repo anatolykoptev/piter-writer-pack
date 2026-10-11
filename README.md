@@ -28,9 +28,19 @@ skills/
   */templates.md         — paragraph/block templates
 ```
 
-## 1. Register the MCP server
+## 1. Get the token (out-of-band — never from chat)
 
-Add this to your agent's MCP config, substituting the token you were given:
+The token must reach you through a file or the clipboard, **not** pasted into a chat window. Look for it in this order:
+
+1. `.env` in the cloned repo root — `grep -m1 '^GO_WP_TOKEN=' .env | cut -d= -f2-`
+2. `~/.go-wp-token` — the file's whole content is the token
+3. Clipboard — `pbpaste` (macOS), `wl-paste` or `xclip -selection clipboard -o` (Linux); use it only if it clearly contains a bearer token (a long hex/base64 string), not arbitrary text
+
+If none of these yields a token, ask your human to place it — e.g. `echo 'GO_WP_TOKEN=<token>' > .env` inside the repo (the file is gitignored) or `~/.go-wp-token`. **Never ask them to paste it into the chat.**
+
+## 2. Register the MCP server
+
+Add this to your agent's MCP config, substituting the token you just read:
 
 ```json
 "go-wp": {
@@ -40,11 +50,11 @@ Add this to your agent's MCP config, substituting the token you were given:
 }
 ```
 
-- **Claude Code**: `claude mcp add --transport http go-wp https://mcp.krolik.run/wp/mcp --header "Authorization: Bearer <TOKEN>"`
+- **Claude Code**: `claude mcp add --transport http go-wp https://mcp.krolik.run/wp/mcp --header "Authorization: Bearer $GO_WP_TOKEN"` (with the value loaded into the env var, so the literal token never passes through a chat message)
 - **Devin CLI**: add the JSON block to `mcpServers` in your Devin config
 - **Other MCP clients**: remote HTTP server with an `Authorization: Bearer` header — same shape
 
-## 2. Install the skills
+## 3. Install the skills
 
 Copy every directory under `skills/` into your skills directory:
 
@@ -54,11 +64,11 @@ Copy every directory under `skills/` into your skills directory:
 
 Keep `_common.md` and `templates.md` inside each skill directory — the recipes reference them locally.
 
-## 3. Read the invariants
+## 4. Read the invariants
 
 Open `skills/piter-writer/SKILL.md` and read it fully **before your first task**. It contains the 8 PRIME DIRECTIVES (anti-fabrication, validation gates, image QC, JSONL discipline, …) and the reporting contract — the required shape of every final report.
 
-## 4. Verify
+## 5. Verify
 
 Run `wp_post action=list project=piter posts_per_page=1` — a JSON list of posts means you are connected. `invalid token` = the header/token is wrong. `denied` on anything else = expected, see below.
 
