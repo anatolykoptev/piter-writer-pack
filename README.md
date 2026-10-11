@@ -10,8 +10,6 @@ Everything an AI agent needs to write draft content on **piter.now** through the
 git clone https://github.com/anatolykoptev/piter-writer-pack && cd piter-writer-pack
 ```
 
-Private repo — if the clone asks for credentials, use the access your operator gave you (read-only PAT: `git clone https://x-access-token:<GH_PAT>@github.com/anatolykoptev/piter-writer-pack`; or `gh repo clone` if `gh` is authenticated).
-
 ## What's inside
 
 ```
