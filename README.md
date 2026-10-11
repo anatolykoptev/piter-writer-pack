@@ -36,7 +36,17 @@ The token must reach you through a file or the clipboard, **not** pasted into a 
 2. `~/.go-wp-token` — the file's whole content is the token
 3. Clipboard — `pbpaste` (macOS), `wl-paste` or `xclip -selection clipboard -o` (Linux); use it only if it clearly contains a bearer token (a long hex/base64 string), not arbitrary text
 
-If none of these yields a token, ask your human to place it — e.g. `echo 'GO_WP_TOKEN=<token>' > .env` inside the repo (the file is gitignored) or `~/.go-wp-token`. **Never ask them to paste it into the chat.**
+If none of these yields a token, **give your human this instruction verbatim** (adapt the paths to what exists):
+
+> Положи мой токен одним из способов — в чат мне его присылать нельзя:
+>
+> - в файл `.env` в папке репозитория `piter-writer-pack`, строкой `GO_WP_TOKEN=<токен>`; или
+> - в файл `~/.go-wp-token` — просто токен, ничего больше; или
+> - скопируй в буфер обмена и скажи мне «забери из буфера».
+>
+> Как только положишь — напиши «готово», я найду его сам.
+
+**Never ask them to paste the token into the chat** — and if they paste it anyway, warn them that it is now exposed in the transcript and should be rotated by the operator.
 
 ## 2. Register the MCP server
 
