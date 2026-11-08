@@ -95,3 +95,10 @@ MCP registered, all skills installed, `piter-writer` read, and `wp_post action=l
 ## Revocation
 
 Access ends the moment the operator removes your entry from the go-wp identity store — the token stops resolving immediately, no restarts. Report a lost/compromised token the moment you notice.
+
+## Maintaining the pack
+
+The pack is documentation only: no build, no tests. The `skills/` tree is regenerated from
+canonical sources by `sync.sh` and must not be edited by hand. Maintainer notes are in
+[CLAUDE.md](CLAUDE.md), contribution rules in [CONTRIBUTING.md](CONTRIBUTING.md), the change
+history in [CHANGELOG.md](CHANGELOG.md), and every document is listed in [docs/INDEX.md](docs/INDEX.md).
