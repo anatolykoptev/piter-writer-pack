@@ -17,7 +17,7 @@ A time-bound EVENTS collection (афиша) via the go-wp **create-events** work
 - `project` — `piter` (RU, default) / `hully` (EN). Pass `project={PROJECT}` to every `wp_*` call.
 
 ## Setup
-Load the deferred go-wp / go-search / go-wowa MCP tools (ToolSearch), same as create-article — see `_common.md`. Confirm `project` first (piter default; ASK only if genuinely ambiguous).
+Load the deferred go-wp / go-search / go-wowa MCP tools (ToolSearch), same as create-article — see `_common.md`. Confirm `project` first (the Russian project is the default; ASK only if genuinely ambiguous).
 
 ## Pipeline
 
@@ -28,7 +28,7 @@ Load the deferred go-wp / go-search / go-wowa MCP tools (ToolSearch), same as cr
 ```
 wf_create template=create-events owner=claude:session params={ "topic": "{{topic}}", "project": "{{project}}", "city": "{CITY}" }
 ```
-`{CITY}`: piter → `Санкт-Петербург`; hully → the CA city from the topic. (`{{topic}}`/`{{project}}` are engine template vars; substitute `{CITY}` yourself.)
+`{CITY}`: Russian project → `Санкт-Петербург`; English project → the CA city from the topic. (`{{topic}}`/`{{project}}` are engine template vars; substitute `{CITY}` yourself.)
 
 ### 3. DRIVE each gate ACTIVELY (7 steps)
 

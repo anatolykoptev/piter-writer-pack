@@ -19,7 +19,7 @@ Targeted fix for specific issues in an existing article. Refer to `_common.md` f
 
 ## Project selection
 
-Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the Hully-specific notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
+Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the English-project notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
 
 ## Arguments
 
