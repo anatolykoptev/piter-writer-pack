@@ -10,7 +10,7 @@ Periodic maintenance tasks that run across articles, not per-article.
 
 ## Project selection
 
-Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the Hully-specific notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
+Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the English-project notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
 
 ## Arguments
 

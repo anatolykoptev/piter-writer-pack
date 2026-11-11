@@ -10,7 +10,7 @@ Discover, filter, and manage news articles. Note: `news_project` is a pipeline k
 
 ## Project selection
 
-Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the Hully-specific notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
+Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the English-project notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
 
 ## Arguments
 
@@ -19,7 +19,7 @@ Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the Hully-specif
 
 ## Pipeline
 
-**Substitute `{NEWS_PROJECT}` with the `news_project` arg value** (`piter.now` for piter, `hully.day` for hully) before executing each step below. The workflow engine does NOT resolve this variable — you (the agent) must substitute it literally.
+**Substitute `{NEWS_PROJECT}` with the `news_project` arg value** (`piter.now` for the Russian project, `hully.day` for the English project) before executing each step below. The workflow engine does NOT resolve this variable — you (the agent) must substitute it literally.
 
 ### 1. DISCOVER
 

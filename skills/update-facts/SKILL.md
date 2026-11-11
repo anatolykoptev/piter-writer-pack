@@ -11,7 +11,7 @@ Load deferred MCP tools (required before any tool calls):
     ToolSearch "+go-wp wp_prd scan temp render image post seo enrich audit research format tags flush check"
     ToolSearch "+go-search research smart web_url"
 
-> **Note**: substitute `{CITY}` based on project — `Санкт-Петербург` for piter, `San Francisco` (or topic-specific CA city) for hully.
+> **Note**: substitute `{CITY}` based on project — `Санкт-Петербург` for the Russian project, `San Francisco` (or topic-specific CA city) for the English project.
 
 # Update Fact Listicle
 
@@ -21,7 +21,7 @@ Update a fact/tip/record listicle where items are NOT venues. Read `_common.md` 
 
 ## Project selection
 
-Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the Hully-specific notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
+Project routing (`piter`=RU / `hully`=EN; ASK if ambiguous) and the English-project notes live in `_common.md` (read every run). Pass `project={PROJECT}` to every `wp_*` call.
 
 ## Arguments
 

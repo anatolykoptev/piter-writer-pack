@@ -20,10 +20,10 @@ This skill supports multiple WordPress projects. Pick the right one before proce
 
 If the prompt is ambiguous, ASK the user before proceeding — do not silently pick a default.
 
-## Hully-specific notes
+## Notes for the English project
 
-- `wp_post` for hully ALWAYS creates draft (status=draft) during the first 30 days of hully content pipeline. Do not override.
-- No SSH available on hully — tools requiring SSH (convert_to_place, ACF autofill, RankMath SSH actions) will return CapabilityError. Skip those steps on hully.
+- `wp_post` for the English project ALWAYS creates a draft (status=draft) during the first 30 days of its content pipeline. Do not override.
+- No SSH is available for the English project — tools requiring SSH (convert_to_place, ACF autofill, RankMath SSH actions) will return CapabilityError. Skip those steps for the English project.
 - Image search uses Openverse + Pexels only (no oxbrowser / no 2GIS / no Yandex).
 
 ## Content Type Routing
@@ -471,7 +471,7 @@ SEO: title 50-60 chars with keyword, description 150-160 chars with CTA verb.
 After publish:
 
     wp_image action=set_featured post_id=ID search_query="topic" project={PROJECT}
-    # TAGS — thematic SEO tags, ~3-5 per post (full policy: the piter SEO profile «## Tag policy»). HARD rules:
+    # TAGS — thematic SEO tags, ~3-5 per post (full policy: the Russian-project SEO profile «## Tag policy»). HARD rules:
     #   - Each tag = a 2-3-word RU SEO phrase that GROUPS this post with others on the same theme
     #     (e.g. «банкротство физических лиц», «музыкальные школы СПб»). NEVER a single word, an abbreviation
     #     («физлиц», «СПб»-as-a-tag), a bare city, or a bare year.
@@ -491,7 +491,7 @@ After publish:
 
 ## Style-check (live post vs in-hand text)
 
-To style-check a LIVE post by id, use `wp_check_anglicisms post_id=ID` (RU only — EN/hully has no post-aware style checker). `wp_check_style` takes raw `text=` (NO `post_id`) and auto-routes RU→anglicism / EN→style-lint — use it for in-hand text such as EN drafts.
+To style-check a LIVE post by id, use `wp_check_anglicisms post_id=ID` (RU only — EN has no post-aware style checker). `wp_check_style` takes raw `text=` (NO `post_id`) and auto-routes RU→anglicism / EN→style-lint — use it for in-hand text such as EN drafts.
 
 ## Contact Sourcing & Provenance
 
@@ -546,7 +546,7 @@ CTA tiers are a PAID product distinction — **never change form factor.** Simpl
 - **Copy methodology** — its only job is to earn the click to the advertiser's link. URL + UTM are advertiser-frozen; only heading / description / button are yours. RU editorial register — concrete and useful, NOT loud (infobiz «успей! / революционный» kills trust on a city-guide):
   1. `heading` = the concrete DIFFERENTIATOR, not the place's name (the reader already sees the name in the card) — the one fact that sets this place apart vs the others in the list. NOT «X — узнайте больше».
   2. `description` closes ONE fear + names the step — kill the single biggest objection of THIS audience AND say what happens after the click.
-  3. `button` = verb + what REALLY happens on the other side, funnel-matched to the destination: form → «Записаться» / «Оставить заявку»; info page → «Узнать стоимость» / «Посмотреть…». «Узнать подробнее» is evasion; never promise what the page doesn't deliver.
+  3. `button` = verb + what REALLY happens on the other side, funnel-matched to the destination: form → «Записаться» / «Оставить заявку»; info page → «Узнать стоимость» / «Посмотреть…». «Узнать подробнее» is a vague non-answer; never promise what the page doesn't deliver.
 - **Provenance — every CTA claim must be quotable from the LIVE site at publish.** `web_url_read` the advertiser site; for each fact in heading / description hold the verbatim source line. A claim you cannot quote → CUT it, do not soften-and-keep. Button = the site's ACTUAL primary CTA wording, not a guessed verb. Reused numbers (ours / the info-grid) can be STALE — the live site wins; re-verify, use the current value, flag the drift. One CTA per place, one action, RU only.
 
 ## Live snapshot self-check (mandatory — audit-clean ≠ page-correct)
