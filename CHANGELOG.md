@@ -6,6 +6,10 @@ entries are grouped by date.
 
 ## [Unreleased]
 
+### Changed
+
+- Licensed under Apache-2.0 from this version on; before this the repository granted no licence.
+
 ### Added
 
 - Repository documents: `CLAUDE.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`,
