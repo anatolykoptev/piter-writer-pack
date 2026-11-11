@@ -1,4 +1,4 @@
-# piter-writer access pack
+# Writer access pack
 
 Everything an AI agent needs to write draft content on **piter.now** through the `go-wp` MCP server — no SSH, no WordPress login, no server access.
 
@@ -7,14 +7,16 @@ Everything an AI agent needs to write draft content on **piter.now** through the
 ## 0. Clone (if you haven't yet)
 
 ```bash
-git clone https://github.com/anatolykoptev/piter-writer-pack && cd piter-writer-pack
+git clone https://github.com/anatolykoptev/piter-writer-pack
 ```
+
+Then change into the cloned directory.
 
 ## What's inside
 
 ```
 skills/
-  piter-writer/          — pipeline invariants + your authority boundary (READ FIRST)
+  <writer skill>/        — pipeline invariants + your authority boundary (READ FIRST)
   podborka-editorial/    — the editorial canon for leads/intros (single source of truth)
   create-article/        — new collection/article workflow
   create-events/         — monthly events round-up (афиша)
@@ -40,7 +42,7 @@ If none of these yields a token, **give your human this instruction verbatim** (
 
 > Положи мой токен одним из способов — в чат мне его присылать нельзя:
 >
-> - в файл `.env` в папке репозитория `piter-writer-pack`, строкой `GO_WP_TOKEN=<токен>`; или
+> - в файл `.env` в корне клонированного репозитория, строкой `GO_WP_TOKEN=<токен>`; или
 > - в файл `~/.go-wp-token` — просто токен, ничего больше; или
 > - скопируй в буфер обмена и скажи мне «забери из буфера».
 >
@@ -76,21 +78,21 @@ Keep `_common.md` and `templates.md` inside each skill directory — the recipes
 
 ## 4. Read the invariants
 
-Open `skills/piter-writer/SKILL.md` and read it fully **before your first task**. It contains the 8 PRIME DIRECTIVES (anti-fabrication, validation gates, image QC, JSONL discipline, …) and the reporting contract — the required shape of every final report.
+Open the `SKILL.md` of the writer skill (the directory under `skills/` whose name ends in `-writer`) and read it fully **before your first task**. It contains the 8 PRIME DIRECTIVES (anti-fabrication, validation gates, image QC, JSONL discipline, …) and the reporting contract — the required shape of every final report.
 
 ## 5. Verify
 
-Run `wp_post action=list project=piter posts_per_page=1` — a JSON list of posts means you are connected. `invalid token` = the header/token is wrong. `denied` on anything else = expected, see below.
+Run `wp_post action=list project=<site> posts_per_page=1` — a JSON list of posts means you are connected. `invalid token` = the header/token is wrong. `denied` on anything else = expected, see below.
 
 ## Server-enforced boundaries
 
 - **Draft only.** You build and audit drafts; publishing is the operator's step. The server rejects live-post edits, `go-live` approval, and `wp_cli` — a `denied` is correct behaviour, never retry or route around it.
-- **`project=piter` only.** Every `wp_*` call takes `project=piter`; other project names are rejected.
+- **One project only.** Every `wp_*` call takes `project=<site>`, where `<site>` is the first label of the site domain named in the introduction above; other project names are rejected.
 - **The token is your identity.** It attributes every action to you in the audit log and to your WordPress author account. Do not paste it into prompts, commits, tickets, or this file. If it leaks, tell the operator — revocation is instant.
 
 ## Done when
 
-MCP registered, all skills installed, `piter-writer` read, and `wp_post action=list` returns posts. Report ready and wait for a content task.
+MCP registered, all skills installed, the writer skill read, and `wp_post action=list` returns posts. Report ready and wait for a content task.
 
 ## Revocation
 
@@ -99,6 +101,8 @@ Access ends the moment the operator removes your entry from the go-wp identity s
 ## Maintaining the pack
 
 The pack is documentation only: no build, no tests. The `skills/` tree is regenerated from
-canonical sources by `sync.sh` and must not be edited by hand. Maintainer notes are in
+canonical sources by `sync.sh` and must not be edited by hand. `sync.sh` reads the ssh target of
+the content server from the `CONTENT_HOST` environment variable and stops if it is unset, so export
+it before running the script. Maintainer notes are in
 [CLAUDE.md](CLAUDE.md), contribution rules in [CONTRIBUTING.md](CONTRIBUTING.md), the change
 history in [CHANGELOG.md](CHANGELOG.md), and every document is listed in [docs/INDEX.md](docs/INDEX.md).
