@@ -104,3 +104,7 @@ the content server from the `CONTENT_HOST` environment variable and stops if it 
 it before running the script. Maintainer notes are in
 [CLAUDE.md](CLAUDE.md), contribution rules in [CONTRIBUTING.md](CONTRIBUTING.md), the change
 history in [CHANGELOG.md](CHANGELOG.md), and every document is listed in [docs/INDEX.md](docs/INDEX.md).
+
+## License
+
+Apache-2.0, see [LICENSE](LICENSE).
